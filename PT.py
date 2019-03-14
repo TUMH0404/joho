@@ -7,6 +7,7 @@ def whiledef(text,n=0):
     動作観察を入力するためのプログラム
     終わるときは"y"のみを入力してEnterをおす。
     それ以外は，文字を入力する。
+    rrrrrrrrrrrrrrrrr
     '''
     rrr=""
     while(1):
