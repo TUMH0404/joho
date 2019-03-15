@@ -199,3 +199,22 @@ def MMT_TEST():
             break
 
     return MMT_name
+
+
+####################
+####################
+def TER():
+    RL = {"R":{"上肢":{"上腕二頭筋":None,"上腕三頭筋":None,"大胸筋":None},\
+               "下肢":{"大腿四頭筋":None,"内転筋群":None,"アキレス腱":None}},
+          "L":{"上肢":{"上腕二頭筋":None,"上腕三頭筋":None,"大胸筋":None},\
+                     "下肢":{"大腿四頭筋":None,"内転筋群":None,"アキレス腱":None}}}
+
+    print("腱反射の結果")
+    for k in RL.keys():
+        for i in RL[k].keys():
+            for u in RL[k][i].keys():
+                RR = input(f"{k}_{u}...\n'+' or '-' or '++' or '+-'\n")
+                RL[k][i][u] = RR
+
+    return RL
+    print("succsess")
