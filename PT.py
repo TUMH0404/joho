@@ -41,44 +41,57 @@ def Posture_Move():
 
 
 
+######################################
+###########    ROM   #################
+######################################
+def str2num(strname):
 
-## ROM  ###
+    while(1):
+
+        r = input(strname)
+        if r.isdigit():
+            result = int(r)
+            break
+        elif r=="q":
+            result = None
+            break
+        else:
+            if "." in r and r.replace(".","").isdigit():
+                result = float(r)
+                break
+
+    return result
+
+## ROM1upper  ###
 def ROM_UE():
-
     '''
     上肢のROMテストの結果を入力する
     返り値は辞書形式
     '''
     ##運動方向と関節部位の関連を定義する
-    J_motion3 = {"屈曲":None,"伸展":None,"内転":None,"外転":None,"内旋":None,"外旋":None}
-    J_motion2 = {"背屈":None,"掌屈":None,"橈屈":None,"尺屈":None}
-    J_motion1 = {"屈曲":None,"伸展":None}
-    J_motion4 = {"回内":None,"回外":None}
-    J_joint = {"肩":J_motion3,"肘":J_motion1,"手":J_motion2,"前腕":J_motion4}
+    J_motion3L = {"屈曲":None,"伸展":None,"内転":None,"外転":None,"内旋":None,"外旋":None}
+    J_motion2L = {"背屈":None,"掌屈":None,"橈屈":None,"尺屈":None}
+    J_motion1L = {"屈曲":None,"伸展":None}
+    J_motion4L = {"回内":None,"回外":None}
+    J_motion3R = J_motion3L.copy()
+    J_motion2R = J_motion2L.copy()
+    J_motion1R = J_motion1L.copy()
+    J_motion4R = J_motion4L.copy()
+
+    J_jointL = {"肩":J_motion3L,"肘":J_motion1L,"手":J_motion2L,"前腕":J_motion4L}
+    J_jointR = {"肩":J_motion3R,"肘":J_motion1R,"手":J_motion2R,"前腕":J_motion4R}
 
     ## 上記の部位と左右の定義
-    JR,JL = J_joint.copy(),J_joint.copy()
+    JR,JL = J_jointR.copy(),J_jointL.copy()
     ROM_LR = {"L":JL,"R":JR}
-    ##
+
+    ################################
+
     for u in ROM_LR.keys():
-        for i in J_joint.keys():
-            for k in J_joint[i].keys():
-                RR = input(f"({u}{i})_{k}....")
-                if RR=="q":
-                    break
-                #elif not type(float(RR)) is int and :
-                if type(float(RR)) is float:
-                    ROM_LR[u][i][k] = float(RR)
-
-                #elif isinstance(int(RR),int):
-                #    ROM_LR[u][i][k] = int(RR)
-
-                #elif isinstance(str(RR),str):
-                #    ROM_LR[u][i][k] = RR
-                else:
-                    ROM_LR[u][i][k] = "----"
-
-
+        for i in ROM_LR[u].keys():
+            for k in ROM_LR[u][i].keys():
+                RR = str2num(f"({u}{i})_{k}....")
+                ROM_LR[u][i][k] = RR
 
             else:
                 continue
@@ -90,44 +103,35 @@ def ROM_UE():
 
 #############
 
-## ROM
+## ROM lower ##
 def ROM_LE():
     ##定義
-    J_motion3 = {"屈曲":None,"伸展":None,"内転":None,"外転":None,"内旋":None,"外旋":None}
-    J_motion2 = {"背屈":None,"底屈":None,"内返し":None,"外返し":None}
-    J_motion1 = {"屈曲":None,"伸展":None}
+    J_motion3L = {"flex":None,"ext":None,"add":None,"abd":None,"e-rot":None,"i-rot":None}
+    J_motion2L = {"d-f":None,"p-f":None}
+    J_motion1L = {"flex":None,"ext":None}
+    J_motion3R = J_motion3L.copy()
+    J_motion2R = J_motion2L.copy()
+    J_motion1R = J_motion1L.copy()
 
-    ROM_LR = {"L":None,"R":None}
-    ##
+    J_jointL = {"Hip":J_motion3L,"Knee":J_motion1L,"Ankle":J_motion2L}
+    J_jointR = {"Hip":J_motion3R,"Knee":J_motion1R,"Ankle":J_motion2R}
+
+    ## 上記の部位と左右の定義
+    JR,JL = J_jointR.copy(),J_jointL.copy()
+    ROM_LR = {"L":JL,"R":JR}
+
     for u in ROM_LR.keys():
-        ## 定義
-        J_joint = {"股":J_motion3,"膝":J_motion1,"足":J_motion2}
-        ##
-        for i in J_joint.keys():
+        for i in ROM_LR[u].keys():
+            for k in ROM_LR[u][i].keys():
+                RR = str2num(f"({u}{i})_{k}....")
+                ROM_LR[u][i][k] = RR
 
-            for k in J_joint[i].keys():
-                RR = input(f"({u}{i})_{k}....")
-
-                if len(RR)>0:
-                    J_joint[i][k] = RR
-                else:
-                    J_joint[i][k] = "----"
-
-                if RR=='q':
-                    print("break0")
-                    break
             else:
                 continue
-            print("break1")
             break
-
         else:
             continue
-        print("break2")
-        ROM_LR[u] = J_joint
         break
-
-
     return ROM_LR
 
 

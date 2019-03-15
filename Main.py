@@ -4,7 +4,9 @@ import PT
 class PT_TESTs:
     def __init__(self):
         self.ID = ""
-        self.result=None
+        self.result_ROM_UE=None
+        self.result_ROM_LE=None
+
 
     def IDinput(self):
         self.ID = input("your id:")
@@ -13,24 +15,17 @@ class PT_TESTs:
         print(self.ID)
 
     def ROM_Upper(self):
-        self.result = PT.ROM_UE()
+        self.result_ROM_UE = .ROM_Upper()
 
+    def ROM_Upper(self):
+        self.result_ROM_LE = a.ROM_Lower()
+
+    def MMT_Test(self):
+        self.result = a.MMT_TEST()
 
 if __name__=="__main__":
-    #a = PT_TESTs()
-    #a.IDinput()
-    #a.IDprint()
-    #a.ROM_Upper()
-    #print(a.result)
-    while(1):
-
-        r = input("test")
-        if r.isdigit():
-            print(int(r))
-            break
-        elif r=="q":
-            break
-        else:
-            if "." in r and r.replace(".","").isdigit():
-                print(float(r))
-                break
+    a = PT_TESTs()
+    a.IDinput()
+    a.IDprint()
+    a.ROM_Upper()
+    a.ROM_Lower()
